@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Snoopy.TimeSeries.TimeSeriesPostProcessor">
+    <Position X="5.75" Y="4" Width="1.75" />
+    <Members>
+      <Field Name="_Enabled" Hidden="true" />
+      <Field Name="_ProcFunc" Hidden="true" />
+      <Property Name="Enabled" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAYAQAgAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TimeSeriesPostProcessor.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snoopy.TimeSeries.TimeSeriesPreprocessor">
+    <Position X="1.25" Y="4" Width="1.75" />
+    <Members>
+      <Field Name="_Enabled" Hidden="true" />
+      <Field Name="_ProcFunc" Hidden="true" />
+      <Property Name="Enabled" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAYAQAgAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TimeSeriesPreprocessor.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snoopy.TimeSeries.TimeSeriesProcessor">
+    <Position X="3.5" Y="0.75" Width="1.75" />
+    <Members>
+      <Field Name="_SampleRate" Hidden="true" />
+    </Members>
+    <NestedTypes>
+      <Class Name="Snoopy.TimeSeries.TimeSeriesProcessor.TSProcessor" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>TimeSeriesProcessor.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAgIAAAAggAAAAAgAAAARAAgCAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TimeSeriesProcessor.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snoopy.TimeSeries.TimeSeriesTransformer">
+    <Position X="3.5" Y="4" Width="1.75" />
+    <Members>
+      <Field Name="_FrameStep" Hidden="true" />
+      <Field Name="_FrameWidth" Hidden="true" />
+      <Field Name="_Win" Hidden="true" />
+      <Field Name="_Window" Hidden="true" />
+      <Field Name="_WindowType" Hidden="true" />
+      <Field Name="_XFormFunc" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAEAAAAABAAAAAYAAIAAAAQiQCBEAAAAAAAECAAAACA=</HashCode>
+      <FileName>TimeSeriesTransformer.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snoopy.TimeSeries.TimeSeriesProcessingPipeline">
+    <Position X="8.5" Y="2.5" Width="2.25" />
+    <Members>
+      <Field Name="_Lock" Hidden="true" />
+      <Field Name="_PostProcessors" Hidden="true" />
+      <Field Name="_PreProcessors" Hidden="true" />
+      <Field Name="_State" Hidden="true" />
+      <Field Name="_Transformer" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Snoopy.TimeSeries.TimeSeriesProcessingPipeline.PipelineState" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>TimeSeriesProcessingPipeline.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAACEAAAAAAAAAAAAgIAAAAAAAIAAAAAAAAQBCAAAiA=</HashCode>
+      <FileName>TimeSeriesProcessingPipeline.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

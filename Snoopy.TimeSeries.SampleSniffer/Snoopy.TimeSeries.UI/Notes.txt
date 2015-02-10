@@ -1,0 +1,17 @@
+﻿
+- NOTE: FPS should be roughly SampleRate / 1000 if processing is keeping up.
+- NOTE: Whats Key? A controlled, predictabl environment. If you know the environemnt that you are quering, then it's easy to query! When noise is introduced, it becomes more difficult and you must refine your query parameters.
+-
+-
+- BUG: TimeSeriesExplorer playback not working correctly. Speed is off.
+- BUG: RT captureing, Changing processing parameters when buffer is sync-ing causes IOOR in pipeline.Process(). I.e. max buffers is changed from 128 to 32.
+
+-
+- ISSUE: Opening a tsb sets the max buffers to length of the buffer. When starting a capture, the buffer does not sync to value selected in the menu.
+- ISSUE: Entire buffer is re-processed when capturing and changing processing parameters. Queries are also re-processed.
+
+-
+- TODO: TimeSeriesExplorer - need to crop image when Save Buffer As... is .png
+- TODO: TimeSeriesQueryResult - Load/Save
+- TODO: TimeSeriesProcessingPipeline - Load/Save
+- TODO: ToString Overrides

@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Snoopy.TimeSeries.TimeSeries" BaseTypeListCollapsed="true">
+    <Position X="2.5" Y="0.5" Width="1.75" />
+    <Members>
+      <Field Name="_Centroid" Hidden="true" />
+      <Field Name="_CentroidIndices" Hidden="true" />
+      <Field Name="_CentroidValues" Hidden="true" />
+      <Field Name="_Energy" Hidden="true" />
+      <Field Name="_IsPostProcessed" Hidden="true" />
+      <Field Name="_IsPreProcessed" Hidden="true" />
+      <Field Name="_Kurtosis" Hidden="true" />
+      <Field Name="_PostProcFrames" Hidden="true" />
+      <Field Name="_PostSamples" Hidden="true" />
+      <Field Name="_PreProcSamples" Hidden="true" />
+      <Field Name="_PreSamples" Hidden="true" />
+      <Field Name="_RawSamples" Hidden="true" />
+      <Field Name="_SampleRate" Hidden="true" />
+      <Field Name="_Samples" Hidden="true" />
+      <Field Name="_Skewness" Hidden="true" />
+      <Field Name="_TimeSpan" Hidden="true" />
+      <Field Name="_TimeStamp" Hidden="true" />
+      <Field Name="_Variance" Hidden="true" />
+      <Method Name="GetCentroidIndex" Hidden="true" />
+      <Method Name="SampleStringToDouble" Hidden="true" />
+      <Method Name="ToSampleString" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>DBABgIGAABgADIhgEIBGAICJAAQINIF1wAQQIQAEADk=</HashCode>
+      <FileName>TimeSeries.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Snoopy.TimeSeries.TimeSeriesBuffer">
+    <Position X="4.5" Y="0.5" Width="1.75" />
+    <Members>
+      <Field Name="_Buffer" Hidden="true" />
+      <Field Name="_BufferMaxSize" Hidden="true" />
+      <Field Name="_Lock" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAIAgIBAAAAACABICAAAAAQAAAAAAgAIEigAAABAACA=</HashCode>
+      <FileName>TimeSeriesBuffer.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snoopy.TimeSeries.TimeSeriesProcessingPipeline">
+    <Position X="4.5" Y="4.5" Width="2.25" />
+    <Members>
+      <Field Name="_Lock" Hidden="true" />
+      <Field Name="_PostProcessors" Hidden="true" />
+      <Field Name="_PreProcessors" Hidden="true" />
+      <Field Name="_State" Hidden="true" />
+      <Field Name="_Transformer" Hidden="true" />
+      <Method Name="PrePostProcessorsChanged" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Snoopy.TimeSeries.TimeSeriesProcessingPipeline.PipelineState" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>TimeSeriesProcessingPipeline.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAACEAAAAAAAAAAAAgIAAAAAAAIAAAAAIAAQBCAAAiA=</HashCode>
+      <FileName>TimeSeriesProcessingPipeline.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Snoopy.TimeSeries.ITimeSeries">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAACAABAAAABAEIAGAAAAAAAABAAFgAQAAQAAAAA=</HashCode>
+      <FileName>Interfaces\ITimeSeries.vb</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Snoopy.TimeSeries.ITimeSeries(Of TSamples)">
+    <Position X="0.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\ITimeSeries.vb</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

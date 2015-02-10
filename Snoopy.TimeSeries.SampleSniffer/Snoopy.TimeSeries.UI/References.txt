@@ -1,0 +1,57 @@
+﻿
+
+http://www.cse.ohio-state.edu/pnl/shareware/
+
+http://www.dspguide.com/ch1.htm
+
+http://code.google.com/p/dimreduction/
+
+http://acs.lbl.gov/software/colt/colt-download/releases/
+
+comirva: 
+praat: http://www.praat.org
+jAudio: http://jaudio.cvs.sourceforge.net (feature extraction)
+OC Volume: http://ocvolume.sourceforge.net
+CMU Sphinx: http://cmusphinx.sourceforge.net/
+MARF: http://marf.sourceforge.net/
+
+Echoprint: http://echoprint.me/
+
+Interactive Digital Filter Design: http://www-users.cs.york.ac.uk/~fisher/mkfilter/
+
+Computer Vision for Music Identification: http://www.cs.cmu.edu/~yke/musicretrieval/
+
+last.fm: https://github.com/lastfm/Fingerprinter
+
+libfooid: http://code.google.com/p/libfooid/
+
+Freetantrum: http://sourceforge.net/projects/freetantrum/
+
+http://wiki.musicbrainz.org/Fingerprinting#Open_Source
+
+pamguard: http://pamguard.svn.sourceforge.net/viewvc/pamguard/PamguardJava/
+
+An Industrial-Strength Audio Search Algorithm
+http://www.ee.columbia.edu/~dpwe/papers/Wang03-shazam.pdf
+
+http://www-users.cs.york.ac.uk/~fisher/mkfilter/
+
+ftp://ftp.icsi.berkeley.edu/pub/real/davidj/
+
+http://www.schmittmachine.com/dywapitchtrack.html
+
+http://gnuradio.org/redmine/projects/gnuradio/wiki
+
+https://github.com/erezrob/UCRCSharp/blob/master/UCRCSharp/UCR_DTW.cs  DTW c#
+https://github.com/doblak/ndtw/tree/master/NDtw DTW c#
+http://code.google.com/p/fastdtw/ DWT Java
+http://www.cs.ucr.edu/~eamonn/UCRsuite.html DWT+ED cpp
+http://code.google.com/p/aquila/source/browse/trunk/src/ DWT cpp
+
+http://www.cs.unc.edu/~welch/kalman/#Anchor-23522 Kalman Filter material
+http://bilgin.esme.org/BitsBytes/KalmanFilterforDummies.aspx
+http://www.codeproject.com/Articles/326657/KalmanDemo
+
+http://code.google.com/p/jmotif/wiki/iSAXJavaPrimer PAA/SAX
+
+https://vorm.net/captchas/ Captcha recognition.
