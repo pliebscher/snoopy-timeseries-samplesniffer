@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2506620C-90F3-4213-A8C8-03B92F78BABA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Snoopy.TimeSeries.Queries</RootNamespace>
+    <AssemblyName>Snoopy.TimeSeries.Queries</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Snoopy.TimeSeries.Queries.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Snoopy.TimeSeries.Queries.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>On</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>Off</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="Snoopy" />
+    <Import Include="Snoopy.TimeSeries" />
+    <Import Include="Snoopy.TimeSeries.Metrics" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DTWRadialQuery.vb" />
+    <Compile Include="CorrelationQuery.vb" />
+    <Compile Include="MurMurHash3Query.vb" />
+    <Compile Include="Hashing\MurMurHash3.vb" />
+    <Compile Include="Misc\Matrix.vb" />
+    <Compile Include="_HMMVQQuery.vb" />
+    <Compile Include="_CCQuery.vb" />
+    <Compile Include="DTWAccordQuery.vb" />
+    <Compile Include="DTWEnvelopeQuery.vb" />
+    <Compile Include="DTWQuery.vb" />
+    <Compile Include="DTWWarpDistQuery.vb" />
+    <Compile Include="DWPitchQuery.vb" />
+    <Compile Include="FPQuery.vb" />
+    <Compile Include="Hashing\MinHash.vb" />
+    <Compile Include="LSRQuery.vb" />
+    <Compile Include="MinHashQuery.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="PAADTWQuery.vb" />
+    <Compile Include="PAAQuery.vb" />
+    <Compile Include="Pitch\DynamicWaveletPitchDetector.vb" />
+    <Compile Include="Pitch\IPitchDetector.vb" />
+    <Compile Include="Pitch\Pitch.vb" />
+    <Compile Include="Pitch\YinPitchDetector.vb" />
+    <Compile Include="SSIMQuery.vb" />
+    <Compile Include="TSTSQuery.vb" />
+    <Compile Include="VQQuery.vb" />
+    <Compile Include="VQ\Centroid.vb" />
+    <Compile Include="VQ\Codebook.vb" />
+    <Compile Include="VQ\PointVector.vb" />
+    <Compile Include="YinPitchQuery.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Snoopy.TimeSeries.Core\Snoopy.TimeSeries.Core.vbproj">
+      <Project>{b485aade-52ac-4a16-9888-577f42f2f466}</Project>
+      <Name>Snoopy.TimeSeries.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Snoopy.TimeSeries.Metrics\Snoopy.TimeSeries.Metrics.vbproj">
+      <Project>{422c1eac-0a86-470d-b04f-9f6a41d849da}</Project>
+      <Name>Snoopy.TimeSeries.Metrics</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

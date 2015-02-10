@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Snoopy.TimeSeries.TimeSeriesQuery">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <Members>
+      <Field Name="_Criteria" Hidden="true" />
+      <Field Name="_Enabled" Hidden="true" />
+      <Field Name="_Id" Hidden="true" />
+      <Field Name="_IsInitialized" Hidden="true" />
+      <Field Name="_LastMatchIgnored" Hidden="true" />
+      <Field Name="_MatchMergeOnSkipMax" Hidden="true" />
+      <Field Name="_MatchMergeOnSkipResult" Hidden="true" />
+      <Field Name="_MatchSkipOnTrueResult" Hidden="true" />
+      <Field Name="_MatchThreshHigh" Hidden="true" />
+      <Field Name="_MatchThreshLow" Hidden="true" />
+      <Field Name="_MaxResults" Hidden="true" />
+      <Field Name="_Results" Hidden="true" />
+      <Method Name="CreateInstance" Hidden="true" />
+      <Property Name="Description" Hidden="true" />
+      <Property Name="Id" Hidden="true" />
+      <Property Name="Name" Hidden="true" />
+      <Method Name="SyncResultSet" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="Snoopy.TimeSeries.TimeSeriesQuery.TSQuery" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>TimeSeriesQuery.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <AssociationLine Name="Results" Type="Snoopy.TimeSeries.TimeSeriesQueryResult">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.006" Y="0.091" Height="0.16" Width="0.693" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAQChMEIAAAoBAQQIGACAARACGEAAAABABAEOABEAAE=</HashCode>
+      <FileName>TimeSeriesQuery.vb</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Results" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Snoopy.TimeSeries.TimeSeriesQueryResult">
+    <Position X="3.25" Y="0.5" Width="2" />
+    <Members>
+      <Field Name="_Data" Hidden="true" />
+      <Field Name="_IsMatch" Hidden="true" />
+      <Field Name="_Query" Hidden="true" />
+      <Field Name="_Value" Hidden="true" />
+      <Method Name="New" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAIABAEAAAAAAAAAAAAABgAAAAkAAAgAAA=</HashCode>
+      <FileName>TimeSeriesQueryResult.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>
