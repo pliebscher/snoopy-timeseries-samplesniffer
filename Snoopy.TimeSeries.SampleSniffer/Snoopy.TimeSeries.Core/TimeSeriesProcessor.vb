@@ -54,7 +54,7 @@ Public MustInherit Class TimeSeriesProcessor
 
     End Function
 
-    
+
 
     Protected Overridable Sub OnSampleRateChanged(sampleRate As Integer)
     End Sub
