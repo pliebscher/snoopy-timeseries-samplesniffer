@@ -33,29 +33,6 @@ Public MustInherit Class TimeSeriesProcessor
         _SampleRate = sampleRate
     End Sub
 
-    ' Protected Friend Function Process(Of TIn As IEquatable(Of TIn), TOut)(series As TIn, processFunc As Func(Of TIn, TOut)) As TOut
-    Protected Friend Function Process1(Of TIn, TOut)(series As TIn, processFunc As Func(Of TIn, TOut)) As TOut
-
-        Try
-
-            Dim out As TOut = processFunc(series)
-
-            If out Is Nothing Then Throw New TimeSeriesProcessorException(String.Format("Processor ({0}) returned nothing!", Me.Name), Me)
-
-            Return out
-
-        Catch tex As TimeSeriesProcessorException
-            Throw
-        Catch ex As Exception
-            If ex.InnerException IsNot Nothing Then ex = ex.InnerException
-            Dim tex As New TimeSeriesProcessorException(ex.Message, Me, ex)
-            Throw tex
-        End Try
-
-    End Function
-
-
-
     Protected Overridable Sub OnSampleRateChanged(sampleRate As Integer)
     End Sub
 
