@@ -8,18 +8,6 @@ Imports System.Runtime.Serialization
 Imports System.Text
 Imports System.Reflection
 
-Public MustInherit Class TimeSeriesProcessor(Of TIn As ITimeSeries(Of TIn), TOut)
-
-    Public Function Process(series As TIn) As TOut
-
-    End Function
-
-    Protected Overridable Function OnProcessTimeSeries(series As ITimeSeries(Of TIn)) As TOut
-
-    End Function
-
-End Class
-
 <RefreshProperties(RefreshProperties.All), DefaultProperty("Description")>
 Public MustInherit Class TimeSeriesProcessor
 
