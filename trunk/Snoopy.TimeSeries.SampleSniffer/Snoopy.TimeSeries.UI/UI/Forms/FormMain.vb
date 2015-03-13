@@ -61,7 +61,7 @@ Public Class FormMain
 
     End Sub
 
-    Private Sub ProcessAllQueries()
+    Private Sub ProcessAllQueryCriteria()
 
         If QueryBuilder.Queries.Count = 0 Then Exit Sub
 
@@ -233,7 +233,7 @@ Public Class FormMain
 
         If Not wait.Cancelled Then
 
-            ProcessAllQueries()
+            ProcessAllQueryCriteria()
 
             If QueryBuilder.Queries.Count > 0 Then
 
@@ -264,13 +264,14 @@ Public Class FormMain
 
                 ProcessCurrentBuffer()
                 ProcessSelectedTimeSeries()
-                ProcessAllQueries()
+                ProcessAllQueryCriteria()
 
                 TimeSeriesCapture.Resume()
 
             Else
 
                 ProcessSelectedTimeSeries()
+                ProcessAllQueryCriteria()
 
                 If TimeSeriesExplorer.FrameBuffer.Count > 0 Then
                     ProcessCurrentBuffer()
@@ -306,8 +307,6 @@ Public Class FormMain
 
             TimeSeriesExplorer.PlotLabeledQueryResults(QueryBuilder.LabeledResults)
 
-            'StatusStrip.Refresh()
-
         Catch ex As Exception
 
             TimeSeriesCapture.Stop()
@@ -331,6 +330,7 @@ Public Class FormMain
         Preprocessor.AddProcessor(Of LinearInterpolator)()
         Preprocessor.AddProcessor(Of ZeroInserter)(True, False)
         Preprocessor.AddProcessor(Of Dither)()
+        'Preprocessor.AddProcessor(Of MeanOffset)()
         Preprocessor.AddProcessor(Of CShifter)()
         Preprocessor.AddProcessor(Of GammaScaler)()
         Preprocessor.AddProcessor(Of EnvelopeExtractor)()
@@ -365,6 +365,7 @@ Public Class FormMain
         TransformChooser.AddTransformer(Of FWTFFT)()
         TransformChooser.AddTransformer(Of LOGCZT)()
         TransformChooser.AddTransformer(Of LOGHILBERT)()
+        TransformChooser.AddTransformer(Of LPC)()
         TransformChooser.AddTransformer(Of MFCC)()
         TransformChooser.AddTransformer(Of WVD)()
         TransformChooser.AddTransformer(Of DHT)()
@@ -409,8 +410,8 @@ Public Class FormMain
         _ProcessingPipeline.PreProcessors = Preprocessor.Processors
         _ProcessingPipeline.PostProcessors = Postprocessor.Processors
 
-        TimeSeriesViewer.Pallet = TimeSeriesExplorer.SelectedPallet
-        TimeSeriesViewer.PalletThreshold = TimeSeriesExplorer.PalletThreshold
+        'TimeSeriesViewer.Pallet = TimeSeriesExplorer.SelectedPallet
+        'TimeSeriesViewer.PalletThreshold = TimeSeriesExplorer.PalletThreshold
 
         _SampleMaxFrames = TimeSeriesExplorer.SampleMaxFrames
 
@@ -463,22 +464,26 @@ Public Class FormMain
     End Sub
 
     Private Sub QueryBuilder_SelectedQueryChanged(sender As Object, e As TimeSeriesQueryEventArgs) Handles QueryBuilder.SelectedQueryChanged
-        'TimeSeriesViewer.SelectedTimeSeries = e.Query.Criteria
+        TimeSeriesViewer.SelectedTimeSeries = e.Query.Criteria
+    End Sub
+
+#End Region
+
+#Region " -- PalletManager -- "
+
+    Private WithEvents _PalletManager As PalettetManager = PalettetManager.Instance
+
+    Private Sub PalletManager_SelectedPalletChanged(sender As Object, e As EventArgs) Handles _PalletManager.SelectedPalletChanged ' TimeSeriesExplorer.SelectedPalletChanged
+        TimeSeriesExplorer.PlotLabeledQueryResults(QueryBuilder.LabeledResults)
+    End Sub
+
+    Private Sub PalletManager_PalletThresholdChanged(sender As Object, e As EventArgs) Handles _PalletManager.PalletThresholdChanged ' TimeSeriesExplorer.SelectedPalletChanged
+        TimeSeriesExplorer.PlotLabeledQueryResults(QueryBuilder.LabeledResults)
     End Sub
 
 #End Region
 
 #Region " -- TimeSeriesExplorer -- "
-
-    Private Sub TimeSeriesExplorer_SelectedPalletChanged(sender As Object, e As EventArgs) Handles TimeSeriesExplorer.SelectedPalletChanged
-        TimeSeriesViewer.Pallet = TimeSeriesExplorer.SelectedPallet
-        TimeSeriesExplorer.PlotLabeledQueryResults(QueryBuilder.LabeledResults)
-    End Sub
-
-    Private Sub TimeSeriesExplorer_PalletThreshholdChanged(sender As Object, e As EventArgs) Handles TimeSeriesExplorer.PalletThreshholdChanged
-        TimeSeriesViewer.PalletThreshold = TimeSeriesExplorer.PalletThreshold
-        TimeSeriesExplorer.PlotLabeledQueryResults(QueryBuilder.LabeledResults)
-    End Sub
 
     Private Sub TimeSeriesExplorer_SelectedTimeSeriesChanged(sender As Object, e As EventArgs) Handles TimeSeriesExplorer.SelectedTimeSeriesChanged
         If TimeSeriesExplorer.SelectedTimeSeriesIndexStart > -1 AndAlso TimeSeriesExplorer.SelectedTimeSeriesIndexEnd > -1 Then

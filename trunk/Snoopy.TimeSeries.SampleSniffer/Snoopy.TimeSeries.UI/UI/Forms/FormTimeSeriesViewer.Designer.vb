@@ -46,8 +46,6 @@ Partial Class FormTimeSeriesViewer
         Me.TimeSeriesViewer.Location = New System.Drawing.Point(-2, 0)
         Me.TimeSeriesViewer.MinimumSize = New System.Drawing.Size(389, 281)
         Me.TimeSeriesViewer.Name = "TimeSeriesViewer"
-        Me.TimeSeriesViewer.Pallet = RgB2561
-        Me.TimeSeriesViewer.PalletThreshold = 100
         Me.TimeSeriesViewer.ShowCentroids = False
         Me.TimeSeriesViewer.Size = New System.Drawing.Size(392, 282)
         Me.TimeSeriesViewer.TabIndex = 0

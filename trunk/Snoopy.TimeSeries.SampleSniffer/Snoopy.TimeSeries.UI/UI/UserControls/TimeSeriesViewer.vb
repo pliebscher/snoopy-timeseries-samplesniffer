@@ -2,10 +2,10 @@
 
     Private _TimeSeries As TimeSeries
 
-    Private _SelectedPallet As IColorPallet = PalletManager.DefaultPallet
-    Private _SelectedPalletThreshold As Integer = 25
-    Private _AutoPallet As IColorPallet = PalletManager.DefaultPallet
-    Private _AutoPalletThreshold As Integer = 25
+    'Private _SelectedPallet As IColorPallet = PalletManager.Instance.SelectedPallet
+    'Private _SelectedPalletThreshold As Integer = 25
+    'Private _AutoPallet As IColorPallet = PalletManager.Instance.SelectedPallet
+    'Private _AutoPalletThreshold As Integer = 25
 
     Public Event Open(sender As Object, e As TimeSeriesEventArgs)
     Public Event Save(sender As Object, e As TimeSeriesEventArgs)
@@ -34,7 +34,7 @@
 
         Dim series As New List(Of TimeSeries)
         series.Add(_TimeSeries)
-        Dim Bmp As Bitmap = Imaging.GetFastLogSpectrogramImage(series, _SelectedPallet, _SelectedPalletThreshold, ShowCentroidsToolStripMenuItem.Checked)
+        Dim Bmp As Bitmap = Imaging.GetFastLogSpectrogramImage(series, PalettetManager.Instance.SelectedPalette, PalettetManager.Instance.PaletteThreshold, ShowCentroidsToolStripMenuItem.Checked)
 
         'If pbTimeSeries.SizeMode = PictureBoxSizeMode.StretchImage Then
         '    Dim bmp2 As New Bitmap(Bmp.Width * 2, Bmp.Height * 2)
@@ -69,17 +69,20 @@
             pbTimeSeries.SizeMode = PictureBoxSizeMode.Zoom
             Panel3.Dock = DockStyle.Fill
             pbTimeSeries.Dock = DockStyle.Fill
+            pbTimeSeries.BorderStyle = BorderStyle.None
 
         ElseIf FillToolStripMenuItem.Checked AndAlso Not pbTimeSeries.SizeMode = PictureBoxSizeMode.StretchImage Then
 
             pbTimeSeries.SizeMode = PictureBoxSizeMode.StretchImage
             Panel3.Dock = DockStyle.Fill
             pbTimeSeries.Dock = DockStyle.Fill
+            pbTimeSeries.BorderStyle = BorderStyle.FixedSingle
 
         ElseIf AutoToolStripMenuItem.Checked Then
 
             If Not pbTimeSeries.SizeMode = PictureBoxSizeMode.AutoSize Then
                 pbTimeSeries.SizeMode = PictureBoxSizeMode.AutoSize
+                pbTimeSeries.BorderStyle = BorderStyle.FixedSingle
 
                 Dim P3Size As Size = Panel3.Size
                 Panel3.Dock = DockStyle.None
@@ -113,21 +116,6 @@
 
     Private Sub TimeSeriesViewer_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-        For Each pallet As KeyValuePair(Of String, IColorPallet) In PalletManager.Pallets
-            Dim MenuItem As New ToolStripMenuItem(pallet.Key, Nothing, AddressOf ColorPalletToolStripMenu_PalletChanged) With {.CheckOnClick = True}
-            ColorPalletToolStripMenu.DropDownItems.Add(MenuItem)
-        Next
-
-        vsPalletThresh.Value = _SelectedPalletThreshold
-        pbColorPallet.Image = Imaging.GetPalletGradientBitmap(_SelectedPallet, True)
-
-    End Sub
-
-    Private Sub vsPalletThresh_Scroll(sender As Object, e As ScrollEventArgs) Handles vsPalletThresh.Scroll
-        If _SelectedPalletThreshold <> vsPalletThresh.Value Then
-            _SelectedPalletThreshold = vsPalletThresh.Value
-            Me.UpdateTimeSeriesImage()
-        End If
     End Sub
 
     Private Sub Panel3_Resize(sender As Object, e As EventArgs) Handles Panel3.Resize
@@ -240,16 +228,6 @@
         UpdateTimeSeriesPictureBox()
     End Sub
 
-    Private Sub AutoPalletToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AutoPalletToolStripMenuItem.Click
-        _SelectedPallet = _AutoPallet
-        _SelectedPalletThreshold = _AutoPalletThreshold
-        vsPalletThresh.Value = _AutoPalletThreshold
-        vsPalletThresh.Enabled = False
-        SetSelectedMenuItem(ColorPalletToolStripMenu, AutoPalletToolStripMenuItem)
-        pbColorPallet.Image = Imaging.GetPalletGradientBitmap(_SelectedPallet, True)
-        UpdateTimeSeriesImage()
-    End Sub
-
     Private Sub ShowCentroidsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowCentroidsToolStripMenuItem.Click
         UpdateTimeSeriesImage()
     End Sub
@@ -310,8 +288,6 @@
         Dim viewer As New FormTimeSeriesViewer
         With viewer
             .ViewControl.SelectedTimeSeries = _TimeSeries.Clone
-            .ViewControl.Pallet = _AutoPallet
-            .ViewControl.PalletThreshold = _SelectedPalletThreshold
             .ViewControl.ShowCentroids = ShowCentroidsToolStripMenuItem.Checked
             .Show()
         End With
@@ -328,14 +304,19 @@
 
 #End Region
 
-    Private Sub ColorPalletToolStripMenu_PalletChanged(sender As Object, e As EventArgs)
-        vsPalletThresh.Enabled = True
-        Dim item As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
-        _SelectedPallet = PalletManager.Pallets(item.Text)
-        pbColorPallet.Image = Imaging.GetPalletGradientBitmap(_SelectedPallet, True)
+#Region " -- PalletManager -- "
+
+    Private WithEvents _PalletManager As PalettetManager = PalettetManager.Instance
+
+    Private Sub PalletManager_SelectedPalletChanged(sender As Object, e As EventArgs) Handles _PalletManager.SelectedPalletChanged
         UpdateTimeSeriesImage()
-        SetSelectedMenuItem(ColorPalletToolStripMenu, item)
     End Sub
+
+    Private Sub PalletManager_PalletThresholdChanged(sender As Object, e As EventArgs) Handles _PalletManager.PalletThresholdChanged
+        UpdateTimeSeriesImage()
+    End Sub
+
+#End Region
 
     Private Sub SetSelectedMenuItem(menu As ToolStripMenuItem, item As ToolStripMenuItem)
         For Each menuItem As ToolStripItem In menu.DropDownItems
@@ -373,38 +354,6 @@
             If value <> ShowCentroidsToolStripMenuItem.Checked Then
                 ShowCentroidsToolStripMenuItem.Checked = value
                 Me.UpdateTimeSeriesImage()
-            End If
-        End Set
-    End Property
-
-    Public Property Pallet As IColorPallet
-        Get
-            Return _AutoPallet
-        End Get
-        Set(value As IColorPallet)
-            If value.GetType IsNot _AutoPallet.GetType Then
-                _AutoPallet = value
-                If AutoPalletToolStripMenuItem.Checked Then
-                    _SelectedPallet = _AutoPallet
-                    pbColorPallet.Image = Imaging.GetPalletGradientBitmap(_AutoPallet, True)
-                End If
-                Me.UpdateTimeSeriesImage()
-            End If
-        End Set
-    End Property
-
-    Public Property PalletThreshold As Integer
-        Get
-            Return _SelectedPalletThreshold
-        End Get
-        Set(value As Integer)
-            If _AutoPalletThreshold <> value Then
-                _AutoPalletThreshold = value
-                If AutoPalletToolStripMenuItem.Checked Then
-                    _SelectedPalletThreshold = _AutoPalletThreshold
-                    vsPalletThresh.Value = value
-                    Me.UpdateTimeSeriesImage()
-                End If
             End If
         End Set
     End Property

@@ -28,11 +28,13 @@ Public MustInherit Class TimeSeriesProcessor
         For Each pi As PropertyInfo In Me.GetType.GetProperties(BindingFlags.Instance Or BindingFlags.Public)
             If pi.CanRead AndAlso pi.CanWrite Then
                 Dim val As Object = pi.GetValue(Me, Nothing)
-                If pi.PropertyType.BaseType Is GetType(System.ValueType) Then
+                If pi.PropertyType.BaseType Is GetType(System.ValueType) Then ' Value Type
                     properties.Add(pi.Name, val)
-                ElseIf pi.PropertyType.BaseType Is GetType(System.Enum) Then
+                ElseIf pi.PropertyType.BaseType Is GetType(System.Enum) Then ' Enum
                     Dim enumType As String = pi.PropertyType.AssemblyQualifiedName
                     properties.Add(pi.Name, String.Format("{0}:{1}", enumType, val.ToString))
+                Else ' Refernce Type
+
                 End If
             End If
         Next

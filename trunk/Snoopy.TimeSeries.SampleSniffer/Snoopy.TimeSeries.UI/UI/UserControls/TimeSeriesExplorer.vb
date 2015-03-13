@@ -14,8 +14,9 @@ Public Class TimeSeriesExplorer
     Private _SelectedTimeSeriesIndexStart As Integer = -1
     Private _SelectedTimeSeriesIndexEnd As Integer = -1
 
-    Private _SelectedPallet As IColorPallet = PalletManager.DefaultPallet
-    Private _PalletThreshhold As Integer = 75
+    'Private _PaletteManager As New PalletManager
+    'Private _SelectedPallet As IColorPallet = _PaletteManager.SelectedPallet
+    'Private _PalletThreshhold As Integer = 75
 
     Private _AllowLoadSave As Boolean = True
     Private _ShowCentroids As Boolean
@@ -24,8 +25,8 @@ Public Class TimeSeriesExplorer
     Public Event TimeSeriesBufferLoaded(sender As Object, e As EventArgs)
     Public Event TimeSeriesBufferSaved(sender As Object, e As EventArgs)
     Public Event SelectedTimeSeriesChanged(sender As Object, e As EventArgs)
-    Public Event SelectedPalletChanged(sender As Object, e As EventArgs)
-    Public Event PalletThreshholdChanged(sender As Object, e As EventArgs)
+    'Public Event SelectedPalletChanged(sender As Object, e As EventArgs)
+    'Public Event PalletThreshholdChanged(sender As Object, e As EventArgs)
     Public Event ShowCentroidsChanged(sender As Object, e As EventArgs)
     Public Event SampleMaxFramesChanged(sender As Object, e As EventArgs)
 
@@ -49,16 +50,16 @@ Public Class TimeSeriesExplorer
 
     Private Sub TimeSeriesCapture_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-        For Each pallet As KeyValuePair(Of String, IColorPallet) In PalletManager.Pallets
+        For Each pallet As KeyValuePair(Of String, IColorPallet) In PalettetManager.Instance.Palettes
             Dim MenuItem As New ToolStripMenuItem(pallet.Key, Nothing, AddressOf ColorPalletToolStripMenu_PalletChanged) With {.CheckOnClick = True}
             ColorPalletToolStripMenuItem.DropDownItems.Add(MenuItem)
         Next
 
         DirectCast(ColorPalletToolStripMenuItem.DropDownItems(0), ToolStripMenuItem).Checked = True
 
-        vsPalletThresh.Value = _PalletThreshhold
+        vsPalletThresh.Value = PalettetManager.Instance.PaletteThreshold
 
-        pbColorPallet.Image = Imaging.GetPalletGradientBitmap(_SelectedPallet, True)
+        pbColorPallet.Image = Imaging.GetPalletGradientBitmap(PalettetManager.Instance.SelectedPalette, True)
 
         ResetDataScrollBar(False)
 
@@ -110,18 +111,15 @@ Public Class TimeSeriesExplorer
         Dim viewer As New FormTimeSeriesViewer
         With viewer
             .ViewControl.SelectedTimeSeries = _SelectedTimeSeries.Clone
-            .ViewControl.Pallet = _SelectedPallet
-            .ViewControl.PalletThreshold = _PalletThreshhold
             .ViewControl.ShowCentroids = _ShowCentroids
             .Show()
         End With
     End Sub
 
     Private Sub vsPalletThresh_Scroll(sender As Object, e As ScrollEventArgs) Handles vsPalletThresh.Scroll
-        If _PalletThreshhold <> vsPalletThresh.Value Then
-            _PalletThreshhold = vsPalletThresh.Value
+        If PalettetManager.Instance.PaletteThreshold <> vsPalletThresh.Value Then
+            PalettetManager.Instance.PaletteThreshold = vsPalletThresh.Value
             Redraw()
-            RaiseEvent PalletThreshholdChanged(Me, e)
         End If
     End Sub
 
@@ -152,11 +150,10 @@ Public Class TimeSeriesExplorer
 
     Private Sub ColorPalletToolStripMenu_PalletChanged(sender As Object, e As EventArgs)
         Dim item As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
-        _SelectedPallet = PalletManager.Pallets(item.Text)
-        pbColorPallet.Image = Imaging.GetPalletGradientBitmap(_SelectedPallet, True)
+        PalettetManager.Instance.SelectedPalette = PalettetManager.Instance.Palettes(item.Text)
+        pbColorPallet.Image = Imaging.GetPalletGradientBitmap(PalettetManager.Instance.SelectedPalette, True)
         Redraw()
         SetSelectedMenuItem(ColorPalletToolStripMenuItem, item)
-        RaiseEvent SelectedPalletChanged(Me, e)
     End Sub
 
     Private Sub ShowCentroidsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowCentroidsToolStripMenuItem.Click
@@ -459,7 +456,7 @@ Public Class TimeSeriesExplorer
                 InitPinnedBmp()
             End If
 
-            Imaging.DrawFrameBufferToPinnedImage(_PinnedBmpArray, _FrameBuffer, _SelectedPallet, _PalletThreshhold, _ShowCentroids)
+            Imaging.DrawFrameBufferToPinnedImage(_PinnedBmpArray, _FrameBuffer, PalettetManager.Instance.SelectedPalette, PalettetManager.Instance.PaletteThreshold, _ShowCentroids)
             bmp = New Bitmap(_PinnedBmp, _PinnedBmp.Width, pnlData.Height - 1)
 
             DrawBoundingBox(bmp)
@@ -550,23 +547,23 @@ Public Class TimeSeriesExplorer
         End Get
     End Property
 
-    Public ReadOnly Property SelectedPallet As IColorPallet
-        Get
-            Return _SelectedPallet
-        End Get
-    End Property
+    'Public ReadOnly Property SelectedPallet As IColorPallet
+    '    Get
+    '        Return _SelectedPallet
+    '    End Get
+    'End Property
 
-    Public Property PalletThreshold As Integer
-        Get
-            Return vsPalletThresh.Value
-        End Get
-        Set(value As Integer)
-            If value <> vsPalletThresh.Value Then
-                vsPalletThresh.Value = value
-                _PalletThreshhold = value
-            End If
-        End Set
-    End Property
+    'Public Property PalletThreshold As Integer
+    '    Get
+    '        Return vsPalletThresh.Value
+    '    End Get
+    '    Set(value As Integer)
+    '        If value <> vsPalletThresh.Value Then
+    '            vsPalletThresh.Value = value
+    '            _PalletThreshhold = value
+    '        End If
+    '    End Set
+    'End Property
 
     Public Property ShowCentroids As Boolean
         Get
