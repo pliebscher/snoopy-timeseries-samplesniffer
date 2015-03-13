@@ -228,7 +228,7 @@
 
         If _Queries(gvQueries.SelectedRows(0).Index) IsNot _SelectedQuery OrElse _Queries(gvQueries.SelectedRows(0).Index).Criteria IsNot _TimeSeries Then
             _SelectedQuery = _Queries(gvQueries.SelectedRows(0).Index)
-            '_TimeSeries = _SelectedQuery.Criteria
+
             pgQueryProperties.SelectedObject = _SelectedQuery
             cbQueryType.SelectedIndex = 0
 

@@ -14,6 +14,7 @@ Public Class Compressor
             Dim sign As Integer = If((series.Samples(i) < 0), -1, 1)
             Dim norm As Double = Math.Abs(series.Samples(i))
             norm = 1.0 - Math.Pow(1.0 - norm, _Factor)
+            If Double.IsNaN(norm) Then norm = 0 ' Should we be doing this? Or would an exception be better?
             series.Samples(i) = norm * sign ' Inline processing
         Next
         Return series.Samples

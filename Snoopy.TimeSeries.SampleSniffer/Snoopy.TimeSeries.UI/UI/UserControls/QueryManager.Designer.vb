@@ -22,26 +22,26 @@ Partial Class QueryManager
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(QueryManager))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(QueryManager))
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.btnOpenQuery = New System.Windows.Forms.ToolStripButton()
+        Me.btnSaveQuery = New System.Windows.Forms.ToolStripButton()
+        Me.btnRemoveQuery = New System.Windows.Forms.ToolStripButton()
+        Me.btnAddQuery = New System.Windows.Forms.ToolStripButton()
         Me.cbQueryType = New System.Windows.Forms.ToolStripComboBox()
+        Me.btnQueryReset = New System.Windows.Forms.ToolStripButton()
+        Me.btnShowResults = New System.Windows.Forms.ToolStripButton()
         Me.pgQueryProperties = New System.Windows.Forms.PropertyGrid()
         Me.gvQueries = New System.Windows.Forms.DataGridView()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.ofdTimeSeriesQuery = New System.Windows.Forms.OpenFileDialog()
         Me.sfdTimeSeriesQuery = New System.Windows.Forms.SaveFileDialog()
         Me.dlgLabelColor = New System.Windows.Forms.ColorDialog()
-        Me.btnOpenQuery = New System.Windows.Forms.ToolStripButton()
-        Me.btnSaveQuery = New System.Windows.Forms.ToolStripButton()
-        Me.btnRemoveQuery = New System.Windows.Forms.ToolStripButton()
-        Me.btnAddQuery = New System.Windows.Forms.ToolStripButton()
-        Me.btnQueryReset = New System.Windows.Forms.ToolStripButton()
-        Me.btnShowResults = New System.Windows.Forms.ToolStripButton()
         Me.LabelColor = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.QueryEnabled = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.LogQuery = New System.Windows.Forms.DataGridViewCheckBoxColumn()
@@ -68,6 +68,51 @@ Partial Class QueryManager
         Me.ToolStrip1.TabIndex = 93
         Me.ToolStrip1.Text = "ToolStrip1"
         '
+        'btnOpenQuery
+        '
+        Me.btnOpenQuery.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnOpenQuery.Image = CType(resources.GetObject("btnOpenQuery.Image"), System.Drawing.Image)
+        Me.btnOpenQuery.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnOpenQuery.Name = "btnOpenQuery"
+        Me.btnOpenQuery.Size = New System.Drawing.Size(23, 22)
+        Me.btnOpenQuery.Text = "&Open"
+        Me.btnOpenQuery.ToolTipText = "Open Query"
+        '
+        'btnSaveQuery
+        '
+        Me.btnSaveQuery.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnSaveQuery.Enabled = False
+        Me.btnSaveQuery.Image = CType(resources.GetObject("btnSaveQuery.Image"), System.Drawing.Image)
+        Me.btnSaveQuery.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnSaveQuery.Name = "btnSaveQuery"
+        Me.btnSaveQuery.Size = New System.Drawing.Size(23, 22)
+        Me.btnSaveQuery.Text = "&Save"
+        Me.btnSaveQuery.ToolTipText = "Save Query"
+        '
+        'btnRemoveQuery
+        '
+        Me.btnRemoveQuery.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.btnRemoveQuery.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnRemoveQuery.Enabled = False
+        Me.btnRemoveQuery.Image = Global.Snoopy.TimeSeries.UI.My.Resources.Resources.delete
+        Me.btnRemoveQuery.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnRemoveQuery.Name = "btnRemoveQuery"
+        Me.btnRemoveQuery.Size = New System.Drawing.Size(23, 22)
+        Me.btnRemoveQuery.Text = "&Remove"
+        Me.btnRemoveQuery.ToolTipText = "Remove Query"
+        '
+        'btnAddQuery
+        '
+        Me.btnAddQuery.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.btnAddQuery.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnAddQuery.Enabled = False
+        Me.btnAddQuery.Image = Global.Snoopy.TimeSeries.UI.My.Resources.Resources.add
+        Me.btnAddQuery.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnAddQuery.Name = "btnAddQuery"
+        Me.btnAddQuery.Size = New System.Drawing.Size(23, 22)
+        Me.btnAddQuery.Text = "&Add"
+        Me.btnAddQuery.ToolTipText = "Add Query"
+        '
         'cbQueryType
         '
         Me.cbQueryType.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
@@ -79,6 +124,28 @@ Partial Class QueryManager
         Me.cbQueryType.Name = "cbQueryType"
         Me.cbQueryType.Size = New System.Drawing.Size(85, 25)
         Me.cbQueryType.ToolTipText = "Queries..."
+        '
+        'btnQueryReset
+        '
+        Me.btnQueryReset.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.btnQueryReset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnQueryReset.Enabled = False
+        Me.btnQueryReset.Image = Global.Snoopy.TimeSeries.UI.My.Resources.Resources.lightning
+        Me.btnQueryReset.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnQueryReset.Name = "btnQueryReset"
+        Me.btnQueryReset.Size = New System.Drawing.Size(23, 22)
+        Me.btnQueryReset.Text = "ToolStripButton1"
+        Me.btnQueryReset.ToolTipText = "Reset Query"
+        '
+        'btnShowResults
+        '
+        Me.btnShowResults.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnShowResults.Image = Global.Snoopy.TimeSeries.UI.My.Resources.Resources.sum
+        Me.btnShowResults.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnShowResults.Name = "btnShowResults"
+        Me.btnShowResults.Size = New System.Drawing.Size(23, 22)
+        Me.btnShowResults.Text = "&Results"
+        Me.btnShowResults.ToolTipText = "Show Results Viewer"
         '
         'pgQueryProperties
         '
@@ -160,73 +227,6 @@ Partial Class QueryManager
         Me.sfdTimeSeriesQuery.DefaultExt = "tsq"
         Me.sfdTimeSeriesQuery.Filter = "TimeSeries Query (*.tsq)|*.tsq|All files (*.*)|*.*"
         '
-        'btnOpenQuery
-        '
-        Me.btnOpenQuery.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.btnOpenQuery.Image = CType(resources.GetObject("btnOpenQuery.Image"), System.Drawing.Image)
-        Me.btnOpenQuery.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnOpenQuery.Name = "btnOpenQuery"
-        Me.btnOpenQuery.Size = New System.Drawing.Size(23, 22)
-        Me.btnOpenQuery.Text = "&Open"
-        Me.btnOpenQuery.ToolTipText = "Open Query"
-        '
-        'btnSaveQuery
-        '
-        Me.btnSaveQuery.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.btnSaveQuery.Enabled = False
-        Me.btnSaveQuery.Image = CType(resources.GetObject("btnSaveQuery.Image"), System.Drawing.Image)
-        Me.btnSaveQuery.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnSaveQuery.Name = "btnSaveQuery"
-        Me.btnSaveQuery.Size = New System.Drawing.Size(23, 22)
-        Me.btnSaveQuery.Text = "&Save"
-        Me.btnSaveQuery.ToolTipText = "Save Query"
-        '
-        'btnRemoveQuery
-        '
-        Me.btnRemoveQuery.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.btnRemoveQuery.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.btnRemoveQuery.Enabled = False
-        Me.btnRemoveQuery.Image = Global.Snoopy.TimeSeries.UI.My.Resources.Resources.delete
-        Me.btnRemoveQuery.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnRemoveQuery.Name = "btnRemoveQuery"
-        Me.btnRemoveQuery.Size = New System.Drawing.Size(23, 22)
-        Me.btnRemoveQuery.Text = "&Remove"
-        Me.btnRemoveQuery.ToolTipText = "Remove Query"
-        '
-        'btnAddQuery
-        '
-        Me.btnAddQuery.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.btnAddQuery.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.btnAddQuery.Enabled = False
-        Me.btnAddQuery.Image = Global.Snoopy.TimeSeries.UI.My.Resources.Resources.add
-        Me.btnAddQuery.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnAddQuery.Name = "btnAddQuery"
-        Me.btnAddQuery.Size = New System.Drawing.Size(23, 22)
-        Me.btnAddQuery.Text = "&Add"
-        Me.btnAddQuery.ToolTipText = "Add Query"
-        '
-        'btnQueryReset
-        '
-        Me.btnQueryReset.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.btnQueryReset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.btnQueryReset.Enabled = False
-        Me.btnQueryReset.Image = Global.Snoopy.TimeSeries.UI.My.Resources.Resources.lightning
-        Me.btnQueryReset.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnQueryReset.Name = "btnQueryReset"
-        Me.btnQueryReset.Size = New System.Drawing.Size(23, 22)
-        Me.btnQueryReset.Text = "ToolStripButton1"
-        Me.btnQueryReset.ToolTipText = "Reset Query"
-        '
-        'btnShowResults
-        '
-        Me.btnShowResults.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.btnShowResults.Image = Global.Snoopy.TimeSeries.UI.My.Resources.Resources.sum
-        Me.btnShowResults.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnShowResults.Name = "btnShowResults"
-        Me.btnShowResults.Size = New System.Drawing.Size(23, 22)
-        Me.btnShowResults.Text = "&Results"
-        Me.btnShowResults.ToolTipText = "Show Results Viewer"
-        '
         'LabelColor
         '
         Me.LabelColor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
@@ -278,6 +278,7 @@ Partial Class QueryManager
         Me.UpdateCriteria.Name = "UpdateCriteria"
         Me.UpdateCriteria.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.UpdateCriteria.ToolTipText = "Update Criteria"
+        Me.UpdateCriteria.Visible = False
         Me.UpdateCriteria.Width = 22
         '
         'ViewCriteria
@@ -295,6 +296,7 @@ Partial Class QueryManager
         Me.ViewCriteria.Name = "ViewCriteria"
         Me.ViewCriteria.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.ViewCriteria.ToolTipText = "View Criteria"
+        Me.ViewCriteria.Visible = False
         Me.ViewCriteria.Width = 22
         '
         'QueryManager

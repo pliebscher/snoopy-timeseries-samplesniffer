@@ -68,6 +68,7 @@
     <Compile Include="AOK.vb" />
     <Compile Include="CHROMA.vb" />
     <Compile Include="DHT.vb" />
+    <Compile Include="LPC.vb" />
     <Compile Include="RASPEC.vb" />
     <Compile Include="SONE.vb" />
     <Compile Include="DGT.vb" />

@@ -130,8 +130,4 @@ Public Class YinPitchDetector
         Return betterTau
     End Function
 
-    Public Function Probability() As Double
-        Return _Probability
-    End Function
-
 End Class

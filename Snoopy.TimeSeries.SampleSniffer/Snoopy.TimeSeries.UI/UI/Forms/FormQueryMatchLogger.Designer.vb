@@ -191,8 +191,6 @@ Partial Class FormQueryMatchLogger
         Me.tsViewer.Location = New System.Drawing.Point(0, -1)
         Me.tsViewer.MinimumSize = New System.Drawing.Size(316, 232)
         Me.tsViewer.Name = "tsViewer"
-        Me.tsViewer.Pallet = RgB2561
-        Me.tsViewer.PalletThreshold = 100
         Me.tsViewer.ShowCentroids = False
         Me.tsViewer.Size = New System.Drawing.Size(359, 232)
         Me.tsViewer.TabIndex = 0

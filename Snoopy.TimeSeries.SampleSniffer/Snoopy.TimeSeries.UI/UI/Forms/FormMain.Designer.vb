@@ -225,7 +225,6 @@ Partial Class FormMain
         Me.TimeSeriesExplorer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TimeSeriesExplorer.Location = New System.Drawing.Point(42, 339)
         Me.TimeSeriesExplorer.Name = "TimeSeriesExplorer"
-        Me.TimeSeriesExplorer.PalletThreshold = 75
         Me.TimeSeriesExplorer.ShowCentroids = False
         Me.TimeSeriesExplorer.Size = New System.Drawing.Size(798, 159)
         Me.TimeSeriesExplorer.TabIndex = 91
@@ -247,8 +246,6 @@ Partial Class FormMain
         Me.TimeSeriesViewer.Location = New System.Drawing.Point(0, 0)
         Me.TimeSeriesViewer.MinimumSize = New System.Drawing.Size(389, 281)
         Me.TimeSeriesViewer.Name = "TimeSeriesViewer"
-        Me.TimeSeriesViewer.Pallet = RgB2561
-        Me.TimeSeriesViewer.PalletThreshold = 100
         Me.TimeSeriesViewer.ShowCentroids = False
         Me.TimeSeriesViewer.Size = New System.Drawing.Size(466, 329)
         Me.TimeSeriesViewer.TabIndex = 71

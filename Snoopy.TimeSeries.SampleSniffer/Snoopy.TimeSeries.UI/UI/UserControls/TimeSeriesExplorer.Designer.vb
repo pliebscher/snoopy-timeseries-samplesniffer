@@ -96,7 +96,7 @@ Partial Class TimeSeriesExplorer
         '
         Me.cmsDataSpectrogram.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PlayStopSelectionMenuItem, Me.ClearSelectionMenuItem, Me.CropSelectionMenuItem, Me.SaveSelectionToolStripMenuItem, Me.OpenInViewerMenuItem, Me.ToolStripSeparator1, Me.SampleBuffersToolStripMenuItem, Me.ColorPalletToolStripMenuItem, Me.ToolStripSeparator3, Me.ShowCentroidsToolStripMenuItem, Me.ShowSpectrogramToolStripMenuItem, Me.ToolStripSeparator2, Me.SaveToolStripMenuItem, Me.LoadToolStripMenuItem})
         Me.cmsDataSpectrogram.Name = "cmsDataSpectrogram"
-        Me.cmsDataSpectrogram.Size = New System.Drawing.Size(170, 264)
+        Me.cmsDataSpectrogram.Size = New System.Drawing.Size(170, 286)
         Me.cmsDataSpectrogram.Text = "Actions"
         '
         'PlayStopSelectionMenuItem
@@ -184,7 +184,7 @@ Partial Class TimeSeriesExplorer
         Me.ColorPalletToolStripMenuItem.Image = Global.Snoopy.TimeSeries.UI.My.Resources.Resources.palette
         Me.ColorPalletToolStripMenuItem.Name = "ColorPalletToolStripMenuItem"
         Me.ColorPalletToolStripMenuItem.Size = New System.Drawing.Size(169, 22)
-        Me.ColorPalletToolStripMenuItem.Text = "Color Pallet"
+        Me.ColorPalletToolStripMenuItem.Text = "Color Palette"
         '
         'ToolStripSeparator3
         '
