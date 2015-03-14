@@ -1,0 +1,2 @@
+![https://snoopy-timeseries-samplesniffer.googlecode.com/svn/snoopy.png](https://snoopy-timeseries-samplesniffer.googlecode.com/svn/snoopy.png)
+<br>A dog bark being queried. Top: reference bark (criteria) Bottom: a set of frames which contain similar barks being queried.
