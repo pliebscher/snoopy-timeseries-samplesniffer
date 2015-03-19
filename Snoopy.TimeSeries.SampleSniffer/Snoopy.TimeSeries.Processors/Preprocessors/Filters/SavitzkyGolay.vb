@@ -73,7 +73,7 @@ Public Class SavitzkyGolay
         If _nl < 0 Then Throw New ArgumentException("NL must be greater than or equal to 0")
         If _nr < 0 Then Throw New ArgumentException("NR must be greater than or equal to 0")
         If _ld > _m Then Throw New ArgumentException("LD must be less than or equal to M")
-        If _nl + _nr > _m Then Throw New ArgumentException(String.Format("NL+NR ({0}) must be greater than or equal to M ({0})", _m, _nl + _nr))
+        If _nl + _nr > _m Then Throw New ArgumentException(String.Format("NL+NR ({0}) must be greater than or equal to M ({1})", _nl + _nr, _m))
 
         Dim a As Double()() = New Double(_m)() {}
 
