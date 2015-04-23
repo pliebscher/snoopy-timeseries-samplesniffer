@@ -72,6 +72,7 @@ Public Class MFCC
     End Sub
 
     Protected Overrides Sub OnSampleRateChanged(sampleRate As Integer)
+        _SampleRate = sampleRate
         InitMatrices()
         MyBase.OnSampleRateChanged(sampleRate)
     End Sub

@@ -78,6 +78,7 @@
     <Compile Include="Postprocessors\ThresholdZero.vb" />
     <Compile Include="Postprocessors\OnsetExtractor.vb" />
     <Compile Include="Preprocessors\Autocorrelate.vb" />
+    <Compile Include="Preprocessors\DCBlocker.vb" />
     <Compile Include="Preprocessors\EnvelopeExtractor.vb" />
     <Compile Include="Preprocessors\TemporalSmoother.vb" />
     <Compile Include="XY.vb" />

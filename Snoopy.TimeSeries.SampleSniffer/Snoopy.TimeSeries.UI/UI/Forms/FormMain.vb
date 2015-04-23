@@ -330,7 +330,7 @@ Public Class FormMain
         Preprocessor.AddProcessor(Of LinearInterpolator)()
         Preprocessor.AddProcessor(Of ZeroInserter)(True, False)
         Preprocessor.AddProcessor(Of Dither)()
-        'Preprocessor.AddProcessor(Of MeanOffset)()
+        Preprocessor.AddProcessor(Of DCBlocker)()
         Preprocessor.AddProcessor(Of CShifter)()
         Preprocessor.AddProcessor(Of GammaScaler)()
         Preprocessor.AddProcessor(Of EnvelopeExtractor)()
