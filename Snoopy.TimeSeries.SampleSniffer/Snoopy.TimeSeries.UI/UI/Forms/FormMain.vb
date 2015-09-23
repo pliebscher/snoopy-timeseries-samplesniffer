@@ -410,9 +410,6 @@ Public Class FormMain
         _ProcessingPipeline.PreProcessors = Preprocessor.Processors
         _ProcessingPipeline.PostProcessors = Postprocessor.Processors
 
-        'TimeSeriesViewer.Pallet = TimeSeriesExplorer.SelectedPallet
-        'TimeSeriesViewer.PalletThreshold = TimeSeriesExplorer.PalletThreshold
-
         _SampleMaxFrames = TimeSeriesExplorer.SampleMaxFrames
 
         ' Cap the results at the number of buffered frames.
@@ -552,6 +549,8 @@ Public Class FormMain
 
         TimeSeriesExplorer.AllowLoadSave = False
 
+        SettingsToolStripMenuItem.Enabled = False
+
         tsFilename.ForeColor = Color.Red
         tsFilename.Text = String.Format("Capturing... Buffer Max Frames: {0}", TimeSeriesExplorer.SampleMaxFrames)
         tsSelectedSeries.Text = "No Frame"
@@ -564,14 +563,7 @@ Public Class FormMain
         tsFilename.ForeColor = Color.Black
         tsFilename.Text = "No File"
         TimeSeriesExplorer.AllowLoadSave = True
-    End Sub
-
-    Private Sub TimeSeriesCapture_SampleRateChanged(sender As Object, e As EventArgs) Handles TimeSeriesCapture.SampleRateChanged
-
-    End Sub
-
-    Private Sub TimeSeriesCapture_SampleSizeChanged(sender As Object, e As EventArgs) Handles TimeSeriesCapture.SampleSizeChanged
-
+        SettingsToolStripMenuItem.Enabled = True
     End Sub
 
 #End Region
@@ -584,6 +576,24 @@ Public Class FormMain
     End Sub
 
 #End Region
+
+#End Region
+
+#Region " -- Toolstrip -- "
+
+    Private Sub SettingsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
+
+        Dim Settings As New FormSettings
+
+        If Settings.ShowDialog = System.Windows.Forms.DialogResult.OK Then
+
+        End If
+
+    End Sub
+
+    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+        Me.Close()
+    End Sub
 
 #End Region
 
@@ -611,6 +621,8 @@ Public Class FormMain
         TransformChooser.SampleRate = App.SampleRate
         Postprocessor.SampleRate = App.SampleRate
 
+        TimeSeriesCapture.Reset()
+
     End Sub
 
     Private Sub App_SampleSizeChanged(sender As Object, e As EventArgs)
@@ -621,5 +633,9 @@ Public Class FormMain
     End Sub
 
 #End Region
+
+
+
+
 
 End Class

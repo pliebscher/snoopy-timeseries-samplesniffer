@@ -2,6 +2,7 @@
 
 Public NotInheritable Class App
 
+    Public Shared Event AudioInputDeviceChanged(sender As Object, e As EventArgs)
     Public Shared Event SampleSizeChanged(sender As Object, e As EventArgs)
     Public Shared Event SampleRateChanged(sender As Object, e As EventArgs)
 
@@ -113,8 +114,11 @@ Public NotInheritable Class App
             Return My.Settings.AudioInputDevice
         End Get
         Set(value As Integer)
-            My.Settings.AudioInputDevice = value
-            My.Settings.Save()
+            If value <> My.Settings.AudioInputDevice Then
+                My.Settings.AudioInputDevice = value
+                My.Settings.Save()
+                RaiseEvent AudioInputDeviceChanged(Nothing, EventArgs.Empty)
+            End If
         End Set
     End Property
 

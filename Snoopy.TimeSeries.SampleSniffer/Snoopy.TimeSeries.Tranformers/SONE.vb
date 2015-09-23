@@ -126,7 +126,7 @@ Public Class SONE
         End While
 
         'create new array of appropriate size
-        boundaries = New Integer(max + 1) {}
+        boundaries = New Integer(max) {} ' ? (max + 1) 
 
         'copy upper boundaries
         For i As Integer = 0 To boundaries.Length - 1

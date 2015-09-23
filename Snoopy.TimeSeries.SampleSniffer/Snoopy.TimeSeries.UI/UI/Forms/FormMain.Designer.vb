@@ -22,7 +22,6 @@ Partial Class FormMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim RgB2561 As Snoopy.TimeSeries.UI.RGB256 = New Snoopy.TimeSeries.UI.RGB256()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.tsSampleRate = New System.Windows.Forms.ToolStripStatusLabel()
@@ -35,17 +34,22 @@ Partial Class FormMain
         Me.ShowFPSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
+        Me.Preprocessor = New Snoopy.TimeSeries.UI.Preprocessor()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.TransformChooser = New Snoopy.TimeSeries.UI.TransformChooser()
         Me.TabPage8 = New System.Windows.Forms.TabPage()
+        Me.Postprocessor = New Snoopy.TimeSeries.UI.Postprocessor()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.QueryBuilder = New Snoopy.TimeSeries.UI.QueryManager()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.TimeSeriesViewer = New Snoopy.TimeSeries.UI.TimeSeriesViewer()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TimeSeriesExplorer = New Snoopy.TimeSeries.UI.TimeSeriesExplorer()
         Me.TimeSeriesCapture = New Snoopy.TimeSeries.UI.TimeSeriesCapture()
-        Me.TimeSeriesViewer = New Snoopy.TimeSeries.UI.TimeSeriesViewer()
-        Me.Preprocessor = New Snoopy.TimeSeries.UI.Preprocessor()
-        Me.TransformChooser = New Snoopy.TimeSeries.UI.TransformChooser()
-        Me.Postprocessor = New Snoopy.TimeSeries.UI.Postprocessor()
-        Me.QueryBuilder = New Snoopy.TimeSeries.UI.QueryManager()
         Me.StatusStrip.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage7.SuspendLayout()
@@ -53,6 +57,7 @@ Partial Class FormMain
         Me.TabPage8.SuspendLayout()
         Me.TabPage4.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'StatusStrip
@@ -158,10 +163,10 @@ Partial Class FormMain
         Me.TabControl1.Controls.Add(Me.TabPage6)
         Me.TabControl1.Controls.Add(Me.TabPage8)
         Me.TabControl1.Controls.Add(Me.TabPage4)
-        Me.TabControl1.Location = New System.Drawing.Point(7, 6)
+        Me.TabControl1.Location = New System.Drawing.Point(7, 27)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(360, 330)
+        Me.TabControl1.Size = New System.Drawing.Size(360, 309)
         Me.TabControl1.TabIndex = 65
         '
         'TabPage7
@@ -170,20 +175,40 @@ Partial Class FormMain
         Me.TabPage7.Location = New System.Drawing.Point(4, 22)
         Me.TabPage7.Name = "TabPage7"
         Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage7.Size = New System.Drawing.Size(352, 304)
+        Me.TabPage7.Size = New System.Drawing.Size(352, 283)
         Me.TabPage7.TabIndex = 6
         Me.TabPage7.Text = "Pre-Process ->"
         Me.TabPage7.UseVisualStyleBackColor = True
+        '
+        'Preprocessor
+        '
+        Me.Preprocessor.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Preprocessor.Location = New System.Drawing.Point(0, 0)
+        Me.Preprocessor.Name = "Preprocessor"
+        Me.Preprocessor.SampleRate = 1
+        Me.Preprocessor.Size = New System.Drawing.Size(352, 283)
+        Me.Preprocessor.TabIndex = 1
         '
         'TabPage6
         '
         Me.TabPage6.Controls.Add(Me.TransformChooser)
         Me.TabPage6.Location = New System.Drawing.Point(4, 22)
         Me.TabPage6.Name = "TabPage6"
-        Me.TabPage6.Size = New System.Drawing.Size(352, 304)
+        Me.TabPage6.Size = New System.Drawing.Size(352, 283)
         Me.TabPage6.TabIndex = 5
         Me.TabPage6.Text = "Transform ->"
         Me.TabPage6.UseVisualStyleBackColor = True
+        '
+        'TransformChooser
+        '
+        Me.TransformChooser.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TransformChooser.Location = New System.Drawing.Point(0, 0)
+        Me.TransformChooser.Name = "TransformChooser"
+        Me.TransformChooser.SampleRate = 1
+        Me.TransformChooser.Size = New System.Drawing.Size(352, 283)
+        Me.TransformChooser.TabIndex = 70
         '
         'TabPage8
         '
@@ -191,20 +216,41 @@ Partial Class FormMain
         Me.TabPage8.Location = New System.Drawing.Point(4, 22)
         Me.TabPage8.Name = "TabPage8"
         Me.TabPage8.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage8.Size = New System.Drawing.Size(352, 304)
+        Me.TabPage8.Size = New System.Drawing.Size(352, 283)
         Me.TabPage8.TabIndex = 7
         Me.TabPage8.Text = "Post-Process ->"
         Me.TabPage8.UseVisualStyleBackColor = True
+        '
+        'Postprocessor
+        '
+        Me.Postprocessor.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Postprocessor.Location = New System.Drawing.Point(0, 0)
+        Me.Postprocessor.Name = "Postprocessor"
+        Me.Postprocessor.SampleRate = 1
+        Me.Postprocessor.Size = New System.Drawing.Size(352, 304)
+        Me.Postprocessor.TabIndex = 73
         '
         'TabPage4
         '
         Me.TabPage4.Controls.Add(Me.QueryBuilder)
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(352, 304)
+        Me.TabPage4.Size = New System.Drawing.Size(352, 283)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Query!"
         Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'QueryBuilder
+        '
+        Me.QueryBuilder.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.QueryBuilder.Location = New System.Drawing.Point(0, 0)
+        Me.QueryBuilder.MaxQueryResults = 0
+        Me.QueryBuilder.Name = "QueryBuilder"
+        Me.QueryBuilder.SelectedTimeSeries = Nothing
+        Me.QueryBuilder.Size = New System.Drawing.Size(352, 283)
+        Me.QueryBuilder.TabIndex = 2
         '
         'Panel1
         '
@@ -212,10 +258,58 @@ Partial Class FormMain
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.Controls.Add(Me.TimeSeriesViewer)
-        Me.Panel1.Location = New System.Drawing.Point(373, 6)
+        Me.Panel1.Location = New System.Drawing.Point(373, 27)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(466, 329)
+        Me.Panel1.Size = New System.Drawing.Size(466, 308)
         Me.Panel1.TabIndex = 29
+        '
+        'TimeSeriesViewer
+        '
+        Me.TimeSeriesViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TimeSeriesViewer.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TimeSeriesViewer.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.TimeSeriesViewer.Location = New System.Drawing.Point(0, 0)
+        Me.TimeSeriesViewer.MinimumSize = New System.Drawing.Size(389, 281)
+        Me.TimeSeriesViewer.Name = "TimeSeriesViewer"
+        Me.TimeSeriesViewer.SelectedTimeSeries = Nothing
+        Me.TimeSeriesViewer.ShowCentroids = False
+        Me.TimeSeriesViewer.Size = New System.Drawing.Size(466, 308)
+        Me.TimeSeriesViewer.TabIndex = 71
+        '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.OptionsToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(842, 24)
+        Me.MenuStrip1.TabIndex = 92
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'FileToolStripMenuItem
+        '
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(35, 20)
+        Me.FileToolStripMenuItem.Text = "File"
+        '
+        'ExitToolStripMenuItem
+        '
+        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(92, 22)
+        Me.ExitToolStripMenuItem.Text = "Exit"
+        '
+        'OptionsToolStripMenuItem
+        '
+        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem})
+        Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
+        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(56, 20)
+        Me.OptionsToolStripMenuItem.Text = "Options"
+        '
+        'SettingsToolStripMenuItem
+        '
+        Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SettingsToolStripMenuItem.Text = "Settings..."
         '
         'TimeSeriesExplorer
         '
@@ -238,57 +332,6 @@ Partial Class FormMain
         Me.TimeSeriesCapture.Size = New System.Drawing.Size(32, 159)
         Me.TimeSeriesCapture.TabIndex = 90
         '
-        'TimeSeriesViewer
-        '
-        Me.TimeSeriesViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TimeSeriesViewer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TimeSeriesViewer.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.TimeSeriesViewer.Location = New System.Drawing.Point(0, 0)
-        Me.TimeSeriesViewer.MinimumSize = New System.Drawing.Size(389, 281)
-        Me.TimeSeriesViewer.Name = "TimeSeriesViewer"
-        Me.TimeSeriesViewer.ShowCentroids = False
-        Me.TimeSeriesViewer.Size = New System.Drawing.Size(466, 329)
-        Me.TimeSeriesViewer.TabIndex = 71
-        Me.TimeSeriesViewer.SelectedTimeSeries = Nothing
-        '
-        'Preprocessor
-        '
-        Me.Preprocessor.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Preprocessor.Location = New System.Drawing.Point(0, 0)
-        Me.Preprocessor.Name = "Preprocessor"
-        Me.Preprocessor.Size = New System.Drawing.Size(352, 304)
-        Me.Preprocessor.TabIndex = 1
-        '
-        'TransformChooser
-        '
-        Me.TransformChooser.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TransformChooser.Location = New System.Drawing.Point(0, 0)
-        Me.TransformChooser.Name = "TransformChooser"
-        Me.TransformChooser.Size = New System.Drawing.Size(352, 304)
-        Me.TransformChooser.TabIndex = 70
-        '
-        'Postprocessor
-        '
-        Me.Postprocessor.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Postprocessor.Location = New System.Drawing.Point(0, 0)
-        Me.Postprocessor.Name = "Postprocessor"
-        Me.Postprocessor.Size = New System.Drawing.Size(352, 304)
-        Me.Postprocessor.TabIndex = 73
-        '
-        'QueryBuilder
-        '
-        Me.QueryBuilder.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.QueryBuilder.Location = New System.Drawing.Point(0, 0)
-        Me.QueryBuilder.MaxQueryResults = 0
-        Me.QueryBuilder.Name = "QueryBuilder"
-        Me.QueryBuilder.SelectedTimeSeries = Nothing
-        Me.QueryBuilder.Size = New System.Drawing.Size(352, 304)
-        Me.QueryBuilder.TabIndex = 2
-        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -300,8 +343,10 @@ Partial Class FormMain
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.StatusStrip)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.DoubleBuffered = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.MinimumSize = New System.Drawing.Size(800, 550)
         Me.Name = "FormMain"
         Me.Text = "Snoopy: Workbench"
@@ -313,6 +358,8 @@ Partial Class FormMain
         Me.TabPage8.ResumeLayout(False)
         Me.TabPage4.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -339,5 +386,10 @@ Partial Class FormMain
     Friend WithEvents OptionsToolStripDropDown As System.Windows.Forms.ToolStripDropDownButton
     Friend WithEvents ShowFPSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tsSampleRate As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
+    Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents OptionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SettingsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

@@ -1,52 +1,49 @@
 ﻿Imports System.Runtime.InteropServices
 
 Friend Class WaveNative
-    ' consts
+
     Public Const MMSYSERR_NOERROR As Integer = 0
-    ' no error
     Public Const MM_WOM_OPEN As Integer = &H3BB
     Public Const MM_WOM_CLOSE As Integer = &H3BC
     Public Const MM_WOM_DONE As Integer = &H3BD
     Public Const MM_WIM_OPEN As Integer = &H3BE
     Public Const MM_WIM_CLOSE As Integer = &H3BF
     Public Const MM_WIM_DATA As Integer = &H3C0
+    Public Const MAXPNAMELEN As Integer = 32
+    Public Const CALLBACK_FUNCTION As Integer = &H30000 ' dwCallback is a FARPROC
+    Public Const TIME_MS As Integer = &H1 ' time in milliseconds
+    Public Const TIME_SAMPLES As Integer = &H2 ' number of wave samples
+    Public Const TIME_BYTES As Integer = &H4 ' current byte offset
 
-    Public Const CALLBACK_FUNCTION As Integer = &H30000
-    ' dwCallback is a FARPROC
-    Public Const TIME_MS As Integer = &H1
-    ' time in milliseconds
-    Public Const TIME_SAMPLES As Integer = &H2
-    ' number of wave samples
-    Public Const TIME_BYTES As Integer = &H4
-    ' current byte offset
-    ' callbacks
     Public Delegate Sub WaveDelegate(ByVal hdrvr As IntPtr, ByVal uMsg As Integer, ByVal dwUser As Integer, ByRef wavhdr As WaveHdr, ByVal dwParam2 As Integer)
 
-    ' structs
-
-    <StructLayout(LayoutKind.Sequential)> _
+    <StructLayout(LayoutKind.Sequential)>
     Public Structure WaveHdr
-        Public lpData As IntPtr
-        ' pointer to locked data buffer
-        Public dwBufferLength As Integer
-        ' length of data buffer
-        Public dwBytesRecorded As Integer
-        ' used for input only
-        Public dwUser As IntPtr
-        ' for client's use
-        Public dwFlags As Integer
-        ' assorted flags (see defines)
-        Public dwLoops As Integer
-        ' loop control counter
-        Public lpNext As IntPtr
-        ' PWaveHdr, reserved for driver
-        Public reserved As Integer
-        ' reserved for driver
+        Public lpData As IntPtr ' pointer to locked data buffer
+        Public dwBufferLength As Integer ' length of data buffer
+        Public dwBytesRecorded As Integer ' used for input only
+        Public dwUser As IntPtr ' for client's use
+        Public dwFlags As Integer ' assorted flags (see defines)
+        Public dwLoops As Integer ' loop control counter
+        Public lpNext As IntPtr ' PWaveHdr, reserved for driver
+        Public reserved As Integer ' reserved for driver
+    End Structure
+
+    <StructLayout(LayoutKind.Sequential)>
+    Public Structure WaveInCaps
+        Public wMid As Short
+        Public wPid As Short
+        Public vDriverVersion As Integer
+        <MarshalAs(UnmanagedType.ByValTStr, SizeConst:=WaveNative.MAXPNAMELEN)>
+        Public szPname As String
+        Public dwFormats As Integer
+        Public wChannels As Short
     End Structure
 
     Private Const mmdll As String = "winmm.dll"
 
-    ' WaveOut calls
+#Region " -- WaveOut -- "
+
     <DllImport(mmdll)>
     Public Shared Function waveOutGetNumDevs() As Integer
     End Function
@@ -95,9 +92,16 @@ Friend Class WaveNative
     Public Shared Function waveOutGetVolume(ByVal hWaveOut As IntPtr, ByVal dwVolume As Integer) As Integer
     End Function
 
-    ' WaveIn calls
+#End Region
+
+#Region " -- WaveIn -- "
+
     <DllImport(mmdll)>
     Public Shared Function waveInGetNumDevs() As Integer
+    End Function
+
+    <DllImport(mmdll)> _
+    Public Shared Function waveInGetDevCaps(uDeviceID As Integer, ByRef lpCaps As WaveInCaps, uSize As UInteger) As Integer
     End Function
 
     <DllImport(mmdll)>
@@ -131,6 +135,8 @@ Friend Class WaveNative
     <DllImport(mmdll)>
     Public Shared Function waveInStop(ByVal hwi As IntPtr) As Integer
     End Function
+
+#End Region
 
     Public Shared Sub [Try](ByVal err As Integer)
         If err <> WaveNative.MMSYSERR_NOERROR Then

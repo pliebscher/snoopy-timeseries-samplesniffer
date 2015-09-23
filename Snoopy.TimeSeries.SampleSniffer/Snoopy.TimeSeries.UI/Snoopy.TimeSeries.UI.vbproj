@@ -96,6 +96,7 @@
     <Compile Include="Audio\WaveOutBuffer.vb" />
     <Compile Include="Audio\WaveOutPlayer.vb" />
     <Compile Include="Extensions.vb" />
+    <Compile Include="GlobalSuppressions.vb" />
     <Compile Include="Pallets\ColorPallet.vb" />
     <Compile Include="Pallets\JET.vb" />
     <Compile Include="Pallets\HS1V1.vb" />
@@ -133,6 +134,12 @@
       <DependentUpon>FormQueryMatchLogger.vb</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\FormQueryMatchLogger.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FormSettings.Designer.vb">
+      <DependentUpon>FormSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\FormSettings.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Forms\FormTimeSeriesViewer.Designer.vb">
@@ -218,6 +225,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\FormQueryMatchLogger.resx">
       <DependentUpon>FormQueryMatchLogger.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\FormSettings.resx">
+      <DependentUpon>FormSettings.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\FormTimeSeriesViewer.resx">
       <DependentUpon>FormTimeSeriesViewer.vb</DependentUpon>

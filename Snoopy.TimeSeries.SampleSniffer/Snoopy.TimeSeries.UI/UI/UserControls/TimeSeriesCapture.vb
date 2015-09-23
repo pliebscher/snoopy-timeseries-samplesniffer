@@ -12,7 +12,6 @@ Public Class TimeSeriesCapture
     Private _Pause As Boolean
 
     Private _FPSThread As Thread
-    'Private _ShowFPS As Boolean
 
     Private _WaveInByteBuffer As Byte()
     Private _WaveInSampleBuffer As Double()
@@ -28,10 +27,6 @@ Public Class TimeSeriesCapture
     Public Event CaptureReset(sender As Object, e As EventArgs)
     Public Event CaptureBufferFull(sender As Object, e As CaptureBufferEventArgs)
 
-    Public Event SampleRateChanged(sender As Object, e As EventArgs)
-    Public Event SampleSizeChanged(sender As Object, e As EventArgs)
-
-
     Public Sub New()
 
         InitializeComponent()
@@ -45,19 +40,6 @@ Public Class TimeSeriesCapture
 #End Region
 
 #Region " -- Form -- "
-
-    Private Sub TimeSeriesCapture_Load(sender As Object, e As EventArgs) Handles Me.Load
-
-        If WaveNative.waveInGetNumDevs() = 0 Then
-            MsgBox("No input devices.", MsgBoxStyle.Information)
-            btnMonitorStart.Enabled = False
-        End If
-
-        ' Load previous settings...
-        Me.SetSelectedMenuItem(SampleRateToolStripMenuItem, My.Settings.SampleRate.ToString)
-        Me.SetSelectedMenuItem(SampleSizeToolStripMenuItem, My.Settings.SampleSize.ToString)
-
-    End Sub
 
     Private Sub TimeSeriesCapture_Disposed(sender As Object, e As EventArgs) Handles Me.Disposed
         If _MI IsNot Nothing Then
@@ -74,106 +56,16 @@ Public Class TimeSeriesCapture
     End Sub
 
     Private Sub btnMonitorStart_Click(sender As Object, e As EventArgs) Handles btnMonitorStart.Click
+        If WaveNative.waveInGetNumDevs() = 0 Then
+            MsgBox("No input devices or input device not selected.", MsgBoxStyle.Information)
+            Exit Sub
+        End If
         Me.Start()
     End Sub
 
     Private Sub btnMonitorStop_Click(sender As Object, e As EventArgs) Handles btnMonitorStop.Click
         Me.Stop()
     End Sub
-
-    Private Sub btnCaptureSettings_Click(sender As Object, e As EventArgs) Handles btnCaptureSettings.Click
-        cmsDataSpectrogram.Show(btnCaptureSettings, btnCaptureSettings.Width \ 2, btnCaptureSettings.Height \ 2)
-    End Sub
-
-#Region " -- Context Menu -- "
-
-    Private Sub SetSelectedMenuItem(menu As ToolStripMenuItem, item As ToolStripMenuItem)
-        For Each menuItem As ToolStripMenuItem In menu.DropDownItems
-            menuItem.Checked = False
-        Next
-        item.Checked = True
-    End Sub
-
-    Private Sub SetSelectedMenuItem(menu As ToolStripMenuItem, value As String)
-        For Each menuItem As ToolStripMenuItem In menu.DropDownItems
-            If menuItem.Text = value Then
-                menuItem.Checked = True
-            Else
-                menuItem.Checked = False
-            End If
-        Next
-    End Sub
-
-    Private Sub SetSampleRate(rate As Integer)
-        RaiseEvent SampleRateChanged(Me, EventArgs.Empty)
-        App.SampleRate = rate
-        Me.Reset()
-    End Sub
-
-    Private Sub tsmSampleRate5k_Click(sender As Object, e As EventArgs) Handles tsmSampleRate5k.Click
-        SetSampleRate(5512)
-        SetSelectedMenuItem(SampleRateToolStripMenuItem, tsmSampleRate5k)
-    End Sub
-
-    Private Sub tsmSampleRate8k_Click(sender As Object, e As EventArgs) Handles tsmSampleRate8k.Click
-        SetSampleRate(8000)
-        SetSelectedMenuItem(SampleRateToolStripMenuItem, tsmSampleRate8k)
-    End Sub
-
-    Private Sub tsmSampleRate11k_Click(sender As Object, e As EventArgs) Handles tsmSampleRate11k.Click
-        SetSampleRate(11025)
-        SetSelectedMenuItem(SampleRateToolStripMenuItem, tsmSampleRate11k)
-    End Sub
-
-    Private Sub tsmSampleRate12k_Click(sender As Object, e As EventArgs) Handles tsmSampleRate12k.Click
-        SetSampleRate(12500)
-        SetSelectedMenuItem(SampleRateToolStripMenuItem, tsmSampleRate12k)
-    End Sub
-
-    Private Sub tsmSampleRate16k_Click(sender As Object, e As EventArgs) Handles tsmSampleRate16k.Click
-        SetSampleRate(16000)
-        SetSelectedMenuItem(SampleRateToolStripMenuItem, tsmSampleRate16k)
-    End Sub
-
-    Private Sub tsmSampleRate22k_Click(sender As Object, e As EventArgs) Handles tsmSampleRate22k.Click
-        SetSampleRate(22050)
-        SetSelectedMenuItem(SampleRateToolStripMenuItem, tsmSampleRate22k)
-    End Sub
-
-    Private Sub tsmSampleRate44k_Click(sender As Object, e As EventArgs) Handles tsmSampleRate44k.Click
-        SetSampleRate(44100)
-        SetSelectedMenuItem(SampleRateToolStripMenuItem, tsmSampleRate44k)
-    End Sub
-
-    ' ---------------------------------------------------------------------------------------------------
-
-    Private Sub SetSampleSize(size As Integer)
-        RaiseEvent SampleSizeChanged(Me, EventArgs.Empty)
-        App.SampleSize = size '* 2
-        Me.Reset()
-    End Sub
-
-    Private Sub tsmSampleSize1024_Click(sender As Object, e As EventArgs) Handles tsmSampleSize1024.Click
-        SetSampleSize(1024)
-        SetSelectedMenuItem(SampleSizeToolStripMenuItem, tsmSampleSize1024)
-    End Sub
-
-    Private Sub tsmSampleSize2048_Click(sender As Object, e As EventArgs) Handles tsmSampleSize2048.Click
-        SetSampleSize(2048)
-        SetSelectedMenuItem(SampleSizeToolStripMenuItem, tsmSampleSize2048)
-    End Sub
-
-    Private Sub tsmSampleSize4096_Click(sender As Object, e As EventArgs) Handles tsmSampleSize4096.Click
-        SetSampleSize(4096)
-        SetSelectedMenuItem(SampleSizeToolStripMenuItem, tsmSampleSize4096)
-    End Sub
-
-    Private Sub tsmSampleSize8192_Click(sender As Object, e As EventArgs) Handles tsmSampleSize8192.Click
-        SetSampleSize(8192)
-        SetSelectedMenuItem(SampleSizeToolStripMenuItem, tsmSampleSize8192)
-    End Sub
-
-#End Region
 
 #End Region
 
@@ -190,14 +82,6 @@ Public Class TimeSeriesCapture
         btnMonitorStart.Image = My.Resources.control_play
         btnMonitorStop.Enabled = True
         btnMonitorStop.Image = My.Resources.control_stop_blue
-
-        For Each item As ToolStripItem In SampleRateToolStripMenuItem.DropDownItems
-            item.Enabled = False
-        Next
-
-        For Each item As ToolStripItem In SampleSizeToolStripMenuItem.DropDownItems
-            item.Enabled = False
-        Next
 
         Dim WaveFormat As New WaveFormat(_SampleRate, App.BitsPerSample, 1)
 
@@ -256,14 +140,6 @@ Public Class TimeSeriesCapture
         btnMonitorStart.Image = My.Resources.control_play_blue
         btnMonitorStop.Enabled = False
         btnMonitorStop.Image = My.Resources.control_stop
-
-        For Each item As ToolStripItem In SampleRateToolStripMenuItem.DropDownItems
-            item.Enabled = True
-        Next
-
-        For Each item As ToolStripItem In SampleSizeToolStripMenuItem.DropDownItems
-            item.Enabled = True
-        Next
 
         FPS = 0
         _Pause = False
